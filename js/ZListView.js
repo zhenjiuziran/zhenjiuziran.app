@@ -9,6 +9,7 @@ import React,{
 } from 'react-native';
 
 var illData = require("./data/ill");
+var illVideo = require("../components/illVideo");
 
 var LOREM_IPSUM = "AAAAA";
 var ZListView = React.createClass({
@@ -114,13 +115,20 @@ var ZListView = React.createClass({
   },
 
   _pressRow: function(sectionID:number,rowID: number) {
-    console.log(this.props);
-    this._pressData[rowID] = !this._pressData[rowID];
-    var data = illData.getData();
-
-    this.setState({dataSource: this.state.dataSource.cloneWithRowsAndSections(
-      this._genRows(this._pressData),data['section'],data['row']
-    )});
+    // console.log(this.props);
+    console.log("_pressRow");
+    this.props.navigator.push({
+       title: "Video Demo",
+       component: illVideo,
+       backButtonTitle: 'Custom Back',
+       passProps: {depth: this.props.depth ? this.props.depth + 1 : 1},
+    });
+    // this._pressData[rowID] = !this._pressData[rowID];
+    // var data = illData.getData();
+    //
+    // this.setState({dataSource: this.state.dataSource.cloneWithRowsAndSections(
+    //   this._genRows(this._pressData),data['section'],data['row']
+    // )});
   },
 });
 
